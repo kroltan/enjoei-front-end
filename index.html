@@ -9,44 +9,50 @@
 
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mockjax/1.6.2/jquery.mockjax.min.js"></script>
-    <script>$.mockjax({url: '/api/newsletter',type: 'post', responseText: { 'status': 'Email cadastrado com sucesso' }});</script>
+
+    <script>
+      // Had to change to a GET since Mockjax was not recognizing POST requests.
+      $.mockjax({
+        url: '/api/newsletter',
+        type: 'get',
+        responseText: { 'status': 'Email cadastrado com sucesso' }
+      });
+    </script>
     <script type="application/javascript">
       $(document).ready(() => {
-          const MODAL_OPEN_CLASS = "Newsletter--open";
-          const INDICATOR_VISIBLE_CLASS = "async-indicator--active";
+        const MODAL_OPEN_CLASS = "Newsletter--open";
+        const INDICATOR_VISIBLE_CLASS = "async-indicator--active";
 
-          const openerLink = $(".js-open-modal");
-          const newsletter = $(".Newsletter");
-          const close = $(".Newsletter__close");
-          const form = $(".Newsletter__form");
-          const indicator = newsletter.find(".async-indicator");
+        const openerLink = $(".js-open-modal");
+        const newsletter = $(".Newsletter");
+        const close = $(".Newsletter__close");
+        const form = $(".Newsletter__form");
+        const indicator = newsletter.find(".async-indicator");
 
-          openerLink.on("click", () => {
-              newsletter.addClass(MODAL_OPEN_CLASS);
+        openerLink.on("click", () => {
+          newsletter.addClass(MODAL_OPEN_CLASS);
+        });
+
+        close.on("click", () => {
+          newsletter.removeClass(MODAL_OPEN_CLASS);
+        });
+
+        form.on("submit", event => {
+          event.preventDefault();
+
+          $.ajax({
+            url: form.attr("action"),
+            method: form.attr("method"),
+            data: form.serialize(),
+          }).done(() => {
+            indicator.removeClass(INDICATOR_VISIBLE_CLASS);
+            newsletter.removeClass(MODAL_OPEN_CLASS);
+          }).fail(() => {
+            indicator.removeClass(INDICATOR_VISIBLE_CLASS);
           });
 
-          close.on("click", () => {
-              newsletter.removeClass(MODAL_OPEN_CLASS);
-          });
-
-          form.on("submit", event => {
-              event.preventDefault();
-
-              $.ajax({
-                  url: form.attr("action"),
-                  method: form.attr("method"),
-                  dataType: "json",
-                  contentType: "application/json",
-                  data: form.serialize(),
-              }).done(() => {
-                  indicator.removeClass(INDICATOR_VISIBLE_CLASS);
-                  newsletter.removeClass(MODAL_OPEN_CLASS);
-              }).fail(() => {
-                  indicator.removeClass(INDICATOR_VISIBLE_CLASS);
-              });
-
-              indicator.addClass(INDICATOR_VISIBLE_CLASS);
-          });
+          indicator.addClass(INDICATOR_VISIBLE_CLASS);
+        });
       });
     </script>
 
@@ -116,14 +122,14 @@
           e manda bala :)
         </p>
         <div class="Newsletter__decoration"></div>
-        <form class="Newsletter__form" action="/api/newsletter" method="post">
+        <form class="Newsletter__form" action="/api/newsletter" method="get">
           <div class="field">
             <label class="field__label" for="name">NOME</label>
-            <input class="field__control" id="name" name="name" required>
+            <input class="field__control" id="name" name="name" type="text" required>
           </div>
           <div class="field">
             <label class="field__label" for="email">EMAIL</label>
-            <input class="field__control" id="email" name="email" required>
+            <input class="field__control" id="email" name="email" type="email" required>
           </div>
 
           <button class="button" type="submit">

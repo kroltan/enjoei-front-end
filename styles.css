@@ -147,6 +147,7 @@
 
   border: 1px solid #ddd9d4;
   border-radius: 3px;
+  padding: 1em;
 
   background-color: white;
 }
@@ -214,11 +215,12 @@
 }
 
 
-@media screen and (max-width: 821px) {
+@media screen and (max-width: 771px) {
   .Newsletter__body {
     width: 320px;
+    height: auto;
 
-    padding: 41px 20px;
+    padding: 41px 20px 34px 20px;
   }
 
   .Newsletter__close {
@@ -257,7 +259,7 @@
   }
 }
 
-@media screen and (min-width: 822px) {
+@media screen and (min-width: 772px) {
   .break-sm {
     display: none;
   }
