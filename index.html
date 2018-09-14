@@ -10,8 +10,53 @@
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mockjax/1.6.2/jquery.mockjax.min.js"></script>
     <script>$.mockjax({url: '/api/newsletter',type: 'post', responseText: { 'status': 'Email cadastrado com sucesso' }});</script>
+    <script type="application/javascript">
+      $(document).ready(() => {
+          const MODAL_OPEN_CLASS = "Newsletter--open";
+          const INDICATOR_VISIBLE_CLASS = "async-indicator--active";
+
+          const openerLink = $(".js-open-modal");
+          const newsletter = $(".Newsletter");
+          const close = $(".Newsletter__close");
+          const form = $(".Newsletter__form");
+          const indicator = newsletter.find(".async-indicator");
+
+          openerLink.on("click", () => {
+              newsletter.addClass(MODAL_OPEN_CLASS);
+          });
+
+          close.on("click", () => {
+              newsletter.removeClass(MODAL_OPEN_CLASS);
+          });
+
+          form.on("submit", event => {
+              event.preventDefault();
+
+              $.ajax({
+                  url: form.attr("action"),
+                  method: form.attr("method"),
+                  dataType: "json",
+                  contentType: "application/json",
+                  data: form.serialize(),
+              }).done(() => {
+                  indicator.removeClass(INDICATOR_VISIBLE_CLASS);
+                  newsletter.removeClass(MODAL_OPEN_CLASS);
+              }).fail(() => {
+                  indicator.removeClass(INDICATOR_VISIBLE_CLASS);
+              });
+
+              indicator.addClass(INDICATOR_VISIBLE_CLASS);
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
 
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         background: #fafafa;
       }
@@ -26,20 +71,20 @@
         text-align: center;
       }
 
-        .Test__logo {
-          display: block;
+      .Test__logo {
+        display: block;
 
-          margin: 7% auto 0;
-        }
+        margin: 7% auto 0;
+      }
 
-        .Test__description {
-          margin: 0;
+      .Test__description {
+        margin: 0;
 
-          font-size: 14px;
-          font-family: Verdana;
-          line-height: 22px;
-          color: #555555;
-        }
+        font-size: 14px;
+        font-family: Verdana;
+        line-height: 22px;
+        color: #555555;
+      }
     </style>
   </head>
 
@@ -57,6 +102,36 @@
       </p>
 
       <img class="Test__logo" src="https://assets3.enjoei.com.br/assets/v2/shared/brand/logo-desktop-x1-c6efd4344c5d7ef839202be76c153e77.png" alt="Enjoei :P">
+    </div>
+
+    <div class="Newsletter">
+      <div class="Newsletter__body">
+        <button class="Newsletter__close"></button>
+        <h1 class="Newsletter__title">ENJUNEWS</h1>
+        <p class="Newsletter__description">
+          receba novidades do site mais legal do brasiô, coloca seu
+          <span class="unbreak-sm"></span>
+          nome e email ai embaixo
+          <span class="break-sm"></span>
+          e manda bala :)
+        </p>
+        <div class="Newsletter__decoration"></div>
+        <form class="Newsletter__form" action="/api/newsletter" method="post">
+          <div class="field">
+            <label class="field__label" for="name">NOME</label>
+            <input class="field__control" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="email">EMAIL</label>
+            <input class="field__control" id="email" name="email" required>
+          </div>
+
+          <button class="button" type="submit">
+            quero receber novidades
+            <span class="async-indicator">...</span>
+          </button>
+        </form>
+      </div>
     </div>
   </body>
 

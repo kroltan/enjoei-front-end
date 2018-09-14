@@ -1,0 +1,268 @@
+.break-sm {
+  display: block;
+}
+
+.unbreak-sm {
+  display: none;
+}
+
+.js-open-modal {
+  cursor: pointer;
+}
+
+.async-indicator:not(.async-indicator--active) {
+  display: none;
+}
+
+.Newsletter {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(57, 55, 53, 0.6);
+}
+
+.Newsletter__body {
+  display: grid;
+  grid-template:
+    "title       title      " auto
+    "description description" auto
+    "decoration  form" 1fr
+    / auto 1fr;
+  align-content: start;
+  position: relative;
+  max-width: 776px;
+  height: 480px;
+
+  padding: 58px 53px;
+
+  color: #ffffff;
+  text-align: center;
+  /*
+    In the reference design, the font was Proxima Nova,
+    but I do not own a license for it.
+    Myriad Pro is vaguely similar, so it is used as a fallback,
+    but it comes with the Adobe suite, so our last resort is Arial.
+  */
+  font-family: Arial, Helvetica, sans-serif;
+
+  border-radius: 8px;
+  background-color: #ec554f;
+}
+
+.Newsletter.Newsletter--open {
+  display: flex;
+}
+
+.Newsletter__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 56px;
+  height: 56px;
+
+  margin: 0;
+  padding: 0;
+  border: none;
+
+  background: url("./close.png") center no-repeat;
+
+  cursor: pointer;
+}
+
+.Newsletter__title {
+  grid-area: title;
+
+  margin: 0 0 18px;
+
+  font-size: 18pt;
+  font-weight: normal;
+  letter-spacing: 1px;
+  line-height: 1em;
+}
+
+.Newsletter__description {
+  grid-area: description;
+
+  margin: 0 0 43px;
+
+  color: #f4f2f0;
+  font-size: 17px;
+  font-weight: lighter;
+  line-height: 1.4em;
+}
+
+.Newsletter__decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: decoration;
+  width: 347px;
+  min-height: 168px;
+
+  margin-left: -53px;
+  padding-left: 12px;
+  padding-bottom: 10px;
+}
+
+.Newsletter__decoration::before {
+
+  content: url("cat-lg.png");
+}
+
+.Newsletter__form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  grid-area: form;
+  width: 376px;
+}
+
+
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  margin-top: 1px;
+  margin-bottom: 15px;
+}
+
+.field__label {
+  margin-bottom: 8px;
+
+  font-size: 11px;
+  line-height: 1em;
+  letter-spacing: 1.5px;
+  text-align: left;
+}
+
+.field__control {
+  height: 50px;
+
+  border: 1px solid #ddd9d4;
+  border-radius: 3px;
+
+  background-color: white;
+}
+
+
+.button {
+  height: 45px;
+
+  padding: 0;
+  border: 1px solid #ddd9d4;
+  border-bottom-width: 2px;
+  border-radius: 3px;
+
+  background-color: white;
+  color: #f77274;
+  font-weight: bold;
+  font-size: 13px;
+  letter-spacing: 0.8px;
+
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 901px) {
+  .Newsletter__body {
+    grid-template:
+      "title      "
+      "description"
+      "form       "
+      "decoration ";
+    justify-items: center;
+    justify-content: center;
+    width: 628px;
+  }
+
+  .Newsletter__close {
+    width: 58px;
+  }
+
+  .Newsletter__title {
+    margin-bottom: 15px;
+  }
+
+  .Newsletter__description {
+    margin-bottom: 17px;
+
+    font-size: 16.5px;
+  }
+
+  .Newsletter__decoration {
+    position: absolute;
+    bottom: -2px;
+    height: 83px;
+    min-height: unset;
+    width: auto;
+    grid-area: unset;
+
+    margin: 0;
+    padding: 0;
+  }
+
+  .Newsletter__decoration::before {
+    content: url("cat-md.png");
+  }
+}
+
+
+@media screen and (max-width: 821px) {
+  .Newsletter__body {
+    width: 320px;
+
+    padding: 41px 20px;
+  }
+
+  .Newsletter__close {
+    width: 38px;
+  }
+
+  .Newsletter__title {
+    margin-bottom: 17px;
+
+    font-size: 21px;
+  }
+
+  .Newsletter__description {
+    margin-left: 5px;
+    margin-bottom: 8px;
+
+    font-size: 13px;
+    line-height: 1.5em;
+  }
+
+  .Newsletter__form {
+    justify-self: stretch;
+    width: unset;
+  }
+
+  .field {
+    margin-top: 0;
+  }
+
+  .field__label {
+    margin-bottom: 9px;
+  }
+
+  .Newsletter__decoration {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 822px) {
+  .break-sm {
+    display: none;
+  }
+
+  .unbreak-sm {
+    display: block;
+  }
+}
