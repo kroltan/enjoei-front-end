@@ -36,8 +36,8 @@
     / auto 1fr;
   align-content: start;
   position: relative;
-  max-width: 776px;
-  height: 480px;
+  max-width: 774px;
+  height: 478px;
 
   padding: 58px 53px;
 
@@ -63,8 +63,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 56px;
-  height: 56px;
+  width: 54px;
+  height: 54px;
 
   margin: 0;
   padding: 0;
@@ -78,12 +78,14 @@
 .Newsletter__title {
   grid-area: title;
 
-  margin: 0 0 18px;
+  margin: 0 0 17px;
 
-  font-size: 18pt;
+  font-size: 19pt;
   font-weight: normal;
-  letter-spacing: 1px;
+  letter-spacing: 0.35px;
   line-height: 1em;
+
+  transform: translate(-0.5px, -2px);
 }
 
 .Newsletter__description {
@@ -95,6 +97,7 @@
   font-size: 17px;
   font-weight: lighter;
   line-height: 1.4em;
+  letter-spacing: -0.1px;
 }
 
 .Newsletter__decoration {
@@ -105,13 +108,13 @@
   width: 347px;
   min-height: 168px;
 
+  margin-top: -1px;
   margin-left: -53px;
-  padding-left: 12px;
+  padding-left: 10px;
   padding-bottom: 10px;
 }
 
 .Newsletter__decoration::before {
-
   content: url("cat-lg.png");
 }
 
@@ -130,7 +133,7 @@
   align-items: stretch;
 
   margin-top: 1px;
-  margin-bottom: 15px;
+  margin-bottom: 13px;
 }
 
 .field__label {
@@ -157,6 +160,7 @@
   height: 45px;
 
   padding: 0;
+  margin-top: 3px;
   border: 1px solid #ddd9d4;
   border-bottom-width: 2px;
   border-radius: 3px;
@@ -180,7 +184,10 @@
       "decoration ";
     justify-items: center;
     justify-content: center;
-    width: 628px;
+    width: 626px;
+    height: 476px;
+
+    padding-top: 56px;
   }
 
   .Newsletter__close {
@@ -189,23 +196,27 @@
 
   .Newsletter__title {
     margin-bottom: 15px;
+
+    transform: translateX(1px);
   }
 
   .Newsletter__description {
-    margin-bottom: 17px;
+    margin-bottom: 19px;
 
     font-size: 16.5px;
+    letter-spacing: 0.1px;
   }
 
   .Newsletter__decoration {
     position: absolute;
-    bottom: -2px;
+    bottom: -3px;
     height: 83px;
     min-height: unset;
     width: auto;
     grid-area: unset;
 
     margin: 0;
+    margin-left: -1px;
     padding: 0;
   }
 
@@ -217,20 +228,22 @@
 
 @media screen and (max-width: 771px) {
   .Newsletter__body {
-    width: 320px;
-    height: auto;
+    width: 317px;
+    height: 393px;
 
-    padding: 41px 20px 34px 20px;
+    padding: 40px 19px 34px 19px;
   }
 
   .Newsletter__close {
-    width: 38px;
+    width: 36px;
   }
 
   .Newsletter__title {
     margin-bottom: 17px;
 
     font-size: 21px;
+
+    transform: unset;
   }
 
   .Newsletter__description {
@@ -248,10 +261,15 @@
 
   .field {
     margin-top: 0;
+    margin-bottom: 15px;
   }
 
   .field__label {
     margin-bottom: 9px;
+  }
+
+  .button {
+    margin-top: 0;
   }
 
   .Newsletter__decoration {
