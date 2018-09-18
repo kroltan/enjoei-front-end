@@ -232,6 +232,7 @@
     height: 393px;
 
     padding: 40px 19px 34px 19px;
+    border-radius: 3px;
   }
 
   .Newsletter__close {
